@@ -6,7 +6,6 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest"
-
   },
   "keywords": [],
   "author": "",
@@ -16,5 +15,8 @@
     "@types/node": "^26.1.2",
     "typescript": "^7.0.2",
     "vitest": "^4.1.10"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.21"
   }
 }
