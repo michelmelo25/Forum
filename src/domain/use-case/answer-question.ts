@@ -17,7 +17,7 @@ export class AnswerQuestionUseCase {
   }: AnswerQuestionUseCaseRequest) {
     const answer = new Answer({ content, authorId: intructorId, questionId });
 
-    await this.answersRepository.creste(answer);
+    await this.answersRepository.create(answer);
 
     return answer;
   }
