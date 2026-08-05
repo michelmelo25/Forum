@@ -9,11 +9,15 @@
     // See also https://aka.ms/tsconfig/module
     "module": "ESNext",
     "target": "esnext",
-    "types": ["node"],
+    "types": ["node", "vitest/globals"],
     // For nodejs:
     "lib": ["esnext"],
     // "types": ["node"],
     // and npm install -D @types/node
+
+    "paths": {
+      "@/*": ["./src/*"]
+    },
 
     // Other Outputs
     "sourceMap": true,
@@ -39,7 +43,7 @@
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "skipLibCheck": true,
-     "moduleResolution": "bundler", // Permite omitir as extensões de arquivo
+    "moduleResolution": "bundler", // Permite omitir as extensões de arquivo
     "allowImportingTsExtensions": true, // Permite importar .ts se o bundler aceitar
     "noEmit": true // Necessário se um bundler estiver gerando os arquivos finais
   }
