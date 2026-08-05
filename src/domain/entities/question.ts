@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 
 interface QuestionProps {
   authorId: UniqueEntityID;
-  bestAnswerId?: UniqueEntityID;
+  bestAnswerId: UniqueEntityID | null;
   title: string;
   slug: Slug;
   content: string;
@@ -66,35 +66,20 @@ export class Question extends Entity<QuestionProps> {
     this.touch();
   }
 
-  set bestAnswerId(bestAnswerId: UniqueEntityID | undefined) {
-    if (bestAnswerId === undefined) {
-      delete this.props.bestAnswerId;
-    } else {
-      this.props.bestAnswerId = bestAnswerId;
-    }
+  set bestAnswerId(bestAnswerId: UniqueEntityID | null) {
+    this.props.bestAnswerId = bestAnswerId;
     this.touch();
   }
 
-  /**
-   * Cria uma pesguna
-   *
-   * @param props
-   * @param id
-   * @returns question
-   *
-   * @example
-   * ```typescript
-   * Question.create(
-   * {authorId: UniqueEntityID,
-  bestAnswerId: UniqueEntityID,
-  title: string,
-  slug?: Slug,
-  content: string,
-  createdAt?: Date,
-  updatedAt?: Date
-  }, id?: UniqueEntityID,)
-   * ```
-   */
+  // set bestAnswerId(bestAnswerId: UniqueEntityID | undefined) {
+  //   if (bestAnswerId === undefined) {
+  //     delete this.props.bestAnswerId;
+  //   } else {
+  //     this.props.bestAnswerId = bestAnswerId;
+  //   }
+  //   this.touch();
+  // }
+
   static create(
     props: Optional<QuestionProps, "createdAt" | "slug">,
     id?: UniqueEntityID,
