@@ -4,4 +4,4 @@ interface InstructorProps {
   name: string;
 }
 
-class Instructor extends Entity<InstructorProps> {}
+export class Instructor extends Entity<InstructorProps> {}
