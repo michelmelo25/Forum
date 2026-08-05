@@ -4,7 +4,7 @@ import type { AnswerRepository } from "../repositories/answer-repository";
 import type { Answer } from "../entities/answer";
 
 const fakeAnswerRepository: AnswerRepository = {
-  creste: async (answer: Answer) => {
+  create: async (answer: Answer) => {
     return;
   },
 };
