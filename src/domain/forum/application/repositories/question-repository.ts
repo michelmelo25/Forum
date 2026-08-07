@@ -7,4 +7,10 @@ export interface QuestionsRepository {
    * @returns {Promise<void>} Uma promessa que se resolve quando a operação termina.
    */
   create(question: Question): Promise<void>;
+  /**
+   * Busca um pergunto com base em sua Slug
+   * @param {String} slug - Slug de uma pergunta
+   * @returns {Promise<Question>} Uma promessa que se resolve quando a operação termina.
+   */
+  findBySlug(slug: string): Promise<Question | null>;
 }
