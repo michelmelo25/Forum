@@ -16,7 +16,8 @@
     // and npm install -D @types/node
 
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@test/*": ["./test/*"]
     },
 
     // Other Outputs
