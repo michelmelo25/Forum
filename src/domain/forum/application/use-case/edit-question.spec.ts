@@ -1,18 +1,18 @@
 import { InMemoryQuestionsRepository } from "@test/repositories/in-memory-questions-repository";
 import { makeQuestion } from "@test/factories/make-question";
-import { DeleteQuestionUseCase } from "./delete-question";
+import { EditQuestionUseCase } from "./edit-question";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
 let inMemoryQuestionRepository: InMemoryQuestionsRepository;
-let sut: DeleteQuestionUseCase;
+let sut: EditQuestionUseCase;
 
-describe("Delete Question", () => {
+describe("Edit Question", () => {
   beforeEach(() => {
     inMemoryQuestionRepository = new InMemoryQuestionsRepository();
-    sut = new DeleteQuestionUseCase(inMemoryQuestionRepository);
+    sut = new EditQuestionUseCase(inMemoryQuestionRepository);
   });
 
-  it("should be able to delete a question", async () => {
+  it("should be able to edit a question", async () => {
     const newQuestion = makeQuestion(
       {
         authorId: new UniqueEntityID("author-1"),
@@ -25,12 +25,17 @@ describe("Delete Question", () => {
     await sut.execute({
       authorId: "author-1",
       questionId: "question-1",
+      title: "Pergunta Teste",
+      content: "Conteudo Teste",
     });
 
-    expect(inMemoryQuestionRepository.items).toHaveLength(0);
+    expect(inMemoryQuestionRepository.items[0]).toMatchObject({
+      title: "Pergunta Teste",
+      content: "Conteudo Teste",
+    });
   });
 
-  it("should be not able to delete a question from another user", async () => {
+  it("should be not able to edit a question from another user", async () => {
     const newQuestion = makeQuestion(
       {
         authorId: new UniqueEntityID("author-1"),
@@ -44,6 +49,8 @@ describe("Delete Question", () => {
       sut.execute({
         authorId: "author-2",
         questionId: "question-1",
+        title: "Pergunta Teste",
+        content: "Conteudo Teste",
       }),
     ).rejects.toBeInstanceOf(Error);
   });
