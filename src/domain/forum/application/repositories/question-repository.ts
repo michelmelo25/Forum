@@ -13,4 +13,8 @@ export interface QuestionsRepository {
    * @returns {Promise<Question>} Uma promessa que se resolve quando a operação termina.
    */
   findBySlug(slug: string): Promise<Question | null>;
+
+  findById(id: string): Promise<Question | null>;
+
+  delete(question: Question): Promise<void>;
 }
