@@ -8,5 +8,6 @@ export interface AnswerRepository {
    * @returns {Promise<void>} Uma promessa que se resolve quando a operação termina.
    */
   create(answer: Answer): Promise<void>;
+  save(answer: Answer): Promise<void>;
   delete(answer: Answer): Promise<void>;
 }
