@@ -2,6 +2,8 @@ import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import type { AnswerRepository } from "../repositories/answer-repository";
 import { AnswerComment } from "../../enterprise/entities/answer-comment";
 import type { AnswerCommentsRepository } from "../repositories/answer-comments-repository";
+import { left, right, type Either } from "@/core/either";
+import { ResourceNotFouldError } from "./errors/resource-not-fould-error";
 
 interface CommentOnAnswerUseCaseRequest {
   authorId: string;
@@ -9,9 +11,12 @@ interface CommentOnAnswerUseCaseRequest {
   content: string;
 }
 
-interface CommentOnAnswerUseCaseResponse {
-  answerComment: AnswerComment;
-}
+type CommentOnAnswerUseCaseResponse = Either<
+  ResourceNotFouldError,
+  {
+    answerComment: AnswerComment;
+  }
+>;
 
 export class CommentOnAnswerUseCase {
   constructor(
@@ -27,7 +32,7 @@ export class CommentOnAnswerUseCase {
     const answer = this.answerRepository.findById(answerId);
 
     if (!answer) {
-      throw new Error("Answer not fould.");
+      return left(new ResourceNotFouldError());
     }
 
     const answerComment = AnswerComment.create({
@@ -38,8 +43,8 @@ export class CommentOnAnswerUseCase {
 
     await this.answerCommentsRepository.create(answerComment);
 
-    return {
+    return right({
       answerComment,
-    };
+    });
   }
 }

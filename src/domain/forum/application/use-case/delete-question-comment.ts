@@ -1,11 +1,17 @@
+import { left, right, type Either } from "@/core/either";
 import type { QuestionCommentsRepository } from "../repositories/question-comments-repository";
+import { ResourceNotFouldError } from "./errors/resource-not-fould-error";
+import { NotAllowedError } from "./errors/not-allowed-error";
 
 interface DeleteQuestionCommentUseCaseRequest {
   authorId: string;
   questionCommentId: string;
 }
 
-interface DeleteQuestionCommentUseCaseResponse {}
+type DeleteQuestionCommentUseCaseResponse = Either<
+  ResourceNotFouldError | NotAllowedError,
+  {}
+>;
 
 export class DeleteQuestionCommentUseCase {
   constructor(private questionCommentsRepository: QuestionCommentsRepository) {}
@@ -18,15 +24,15 @@ export class DeleteQuestionCommentUseCase {
       await this.questionCommentsRepository.findById(questionCommentId);
 
     if (!questionComment) {
-      throw new Error("Question Comment not fould.");
+      return left(new ResourceNotFouldError());
     }
 
     if (questionComment.authorId.toString() !== authorId) {
-      throw new Error("Not autorized.");
+      return left(new NotAllowedError());
     }
 
     await this.questionCommentsRepository.delete(questionComment);
 
-    return {};
+    return right({});
   }
 }
