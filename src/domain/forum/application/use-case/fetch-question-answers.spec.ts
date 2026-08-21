@@ -2,13 +2,19 @@ import { InMemoryAnswersRepository } from "@test/repositories/in-memory-answers-
 import { FetchQuestionAnswers } from "./fetch-question-answers";
 import { makeAnswer } from "@test/factories/make-answer";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
+import { InMemoryAnswerAttachmentsRepository } from "@test/repositories/in-memory-answer-attachments-repository";
 
 let inMemoryAnswerRepository: InMemoryAnswersRepository;
+let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository;
 let sut: FetchQuestionAnswers;
 
 describe("Fetch Questions Answers", () => {
   beforeEach(() => {
-    inMemoryAnswerRepository = new InMemoryAnswersRepository();
+    inMemoryAnswerAttachmentsRepository =
+      new InMemoryAnswerAttachmentsRepository();
+    inMemoryAnswerRepository = new InMemoryAnswersRepository(
+      inMemoryAnswerAttachmentsRepository,
+    );
     sut = new FetchQuestionAnswers(inMemoryAnswerRepository);
   });
 
