@@ -1,8 +1,8 @@
 import { left, right, type Either } from "@/core/either";
 import type { Answer } from "../../enterprise/entities/answer";
 import type { AnswerRepository } from "../repositories/answer-repository";
-import { ResourceNotFouldError } from "./errors/resource-not-fould-error";
-import { NotAllowedError } from "./errors/not-allowed-error";
+import { ResourceNotFouldError } from "@/core/errors/resource-not-fould-error";
+import { NotAllowedError } from "@/core/errors/not-allowed-error";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { AnswerAttachmentList } from "../../enterprise/entities/answer-attachment-list";
 import { AnswerAttachment } from "../../enterprise/entities/answer-attachment";

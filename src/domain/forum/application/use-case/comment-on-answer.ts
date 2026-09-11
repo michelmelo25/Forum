@@ -3,7 +3,7 @@ import type { AnswerRepository } from "../repositories/answer-repository";
 import { AnswerComment } from "../../enterprise/entities/answer-comment";
 import type { AnswerCommentsRepository } from "../repositories/answer-comments-repository";
 import { left, right, type Either } from "@/core/either";
-import { ResourceNotFouldError } from "./errors/resource-not-fould-error";
+import { ResourceNotFouldError } from "@/core/errors/resource-not-fould-error";
 
 interface CommentOnAnswerUseCaseRequest {
   authorId: string;

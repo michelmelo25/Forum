@@ -1,7 +1,7 @@
 import { left, right, type Either } from "@/core/either";
 import { Question } from "../../enterprise/entities/question";
 import type { QuestionsRepository } from "../repositories/question-repository";
-import { ResourceNotFouldError } from "./errors/resource-not-fould-error";
+import { ResourceNotFouldError } from "@/core/errors/resource-not-fould-error";
 
 interface GetQuestionBySlugRequest {
   slug: string;

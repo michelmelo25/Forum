@@ -4,7 +4,7 @@ import type { QuestionsRepository } from "../repositories/question-repository";
 import { QuestionComment } from "../../enterprise/entities/question-comment";
 import type { QuestionCommentsRepository } from "../repositories/question-comments-repository";
 import { left, right, type Either } from "@/core/either";
-import { ResourceNotFouldError } from "./errors/resource-not-fould-error";
+import { ResourceNotFouldError } from "@/core/errors/resource-not-fould-error";
 
 interface CommentOnQuestionUseCaseRequest {
   authorId: string;
